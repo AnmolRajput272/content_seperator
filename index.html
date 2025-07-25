@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Text Splitter (1800 chars, word-safe)</title>
+  <title>Text Splitter (1600 chars, word-safe)</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -31,7 +31,7 @@
 </head>
 <body>
 
-  <h2>Split Text into 1800-character Chunks (Word Safe)</h2>
+  <h2>Split Text into 1600-character Chunks (Word Safe)</h2>
 
   <textarea id="inputText" placeholder="Paste your long text here..."></textarea>
   <br>
@@ -42,7 +42,7 @@
   <script>
     function splitText() {
       const input = document.getElementById("inputText").value.trim();
-      const maxLength = 1800;
+      const maxLength = 1600;
       const outputContainer = document.getElementById("outputContainer");
       outputContainer.innerHTML = '';
 
@@ -53,7 +53,7 @@
         if (end >= input.length) {
           end = input.length;
         } else {
-          // Look backward for the last space before the 1800 char limit
+          // Look backward for the last space before the 1600 char limit
           const lastSpace = input.lastIndexOf(" ", end);
           if (lastSpace > start) {
             end = lastSpace;
