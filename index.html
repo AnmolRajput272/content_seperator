@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text Splitter (1800 chars, word-safe)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    textarea {
+      width: 100%;
+      height: 200px;
+      font-size: 16px;
+      padding: 10px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    .output-part {
+      margin-top: 20px;
+      border: 1px solid #ccc;
+      padding: 15px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Split Text into 1800-character Chunks (Word Safe)</h2>
+
+  <textarea id="inputText" placeholder="Paste your long text here..."></textarea>
+  <br>
+  <button onclick="splitText()">Split Text</button>
+
+  <div id="outputContainer"></div>
+
+  <script>
+    function splitText() {
+      const input = document.getElementById("inputText").value.trim();
+      const maxLength = 1800;
+      const outputContainer = document.getElementById("outputContainer");
+      outputContainer.innerHTML = '';
+
+      let start = 0;
+      while (start < input.length) {
+        let end = start + maxLength;
+
+        if (end >= input.length) {
+          end = input.length;
+        } else {
+          // Look backward for the last space before the 1800 char limit
+          const lastSpace = input.lastIndexOf(" ", end);
+          if (lastSpace > start) {
+            end = lastSpace;
+          }
+        }
+
+        const chunk = input.slice(start, end).trim();
+        if (chunk.length > 0) {
+          const div = document.createElement("div");
+          div.className = "output-part";
+          div.textContent = chunk;
+          outputContainer.appendChild(div);
+        }
+
+        // Move start to the character after the last space
+        start = end + 1;
+      }
+    }
+  </script>
+
+</body>
+</html>
+
